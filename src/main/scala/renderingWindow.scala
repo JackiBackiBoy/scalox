@@ -1,10 +1,10 @@
 package scala3d
 
+import java.nio._
 import org.lwjgl.opengl.GL11._
 import org.lwjgl.opengl.GL15._
 import org.lwjgl.opengl.GL20._
 import org.lwjgl.opengl.GL30._
-import java.nio._
 import org.lwjgl.BufferUtils
 import org.lwjgl.system.MemoryUtil
 
@@ -14,7 +14,7 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
                                0.0f,  0.5f, 0.0f)
   var vao: Int = 0
   var vbo: Int = 0
-  var shaderProgram: Int = 0
+  var shader: Shader = new Shader();
 
   override def onStart(): Unit =
     // Vertex array object (VAO)
@@ -33,41 +33,14 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0) // positions (x, y, z)
     glEnableVertexAttribArray(0)
 
-    // Shader
-    val vertexShaderSource: CharSequence = "#version 330 core\n" +
-                       "layout (location = 0) in vec3 aPos;\n" +
-                       "void main()\n" +
-                       "{\n" +
-                       "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n" +
-                       "}"
-
-    val fragmentShaderSource: CharSequence = "#version 330 core\n" +
-                       "out vec4 FragColor;\n" +
-                       "void main()\n" +
-                       "{\n" +
-                       "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n" +
-                       "}"
-
-    val vertexShaderID = glCreateShader(GL_VERTEX_SHADER)
-    glShaderSource(vertexShaderID, vertexShaderSource)
-    glCompileShader(vertexShaderID)
-
-    val fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER)
-    glShaderSource(fragmentShaderID, fragmentShaderSource)
-    glCompileShader(fragmentShaderID)
-
-    shaderProgram = glCreateProgram()
-    glAttachShader(shaderProgram, vertexShaderID)
-    glAttachShader(shaderProgram, fragmentShaderID)
-    glLinkProgram(shaderProgram)
-    glUseProgram(shaderProgram)
-    glDeleteShader(vertexShaderID)
-    glDeleteShader(fragmentShaderID)
+    shader.loadShader(ShaderType.Vertex, "assets/shaders/lighting_shader.vert")
+    shader.loadShader(ShaderType.Fragment, "assets/shaders/lighting_shader.frag")
+    shader.createProgram();
 
   override def onUpdate(deltaTime: Double): Unit =
     println("Update")
     
   override def onRender(deltaTime: Double): Unit =
-    glUseProgram(shaderProgram)
+    glUseProgram(shader.id)
     glBindVertexArray(vao)
     glDrawArrays(GL_TRIANGLES, 0, 3)
