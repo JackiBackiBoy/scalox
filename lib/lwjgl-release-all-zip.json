@@ -3,7 +3,8 @@
   "mode": "zip",
   "selectedAddons": [],
   "platform": [
-    "linux"
+    "linux",
+    "windows"
   ],
   "descriptions": false,
   "compact": false,
@@ -14,6 +15,6 @@
   "osgi": false,
   "language": "groovy",
   "preset": "all",
-  "version": "3.3.0",
+  "version": "3.2.3",
   "versionLatest": "3.3.0"
 }

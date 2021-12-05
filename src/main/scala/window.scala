@@ -3,6 +3,7 @@ package scala3d
 import org.lwjgl._
 import org.lwjgl.glfw._
 import org.lwjgl.opengl._
+import org.lwjgl.system._
 
 import org.lwjgl.glfw.Callbacks._
 import org.lwjgl.glfw.GLFW._
@@ -12,6 +13,7 @@ import org.lwjgl.system.MemoryUtil._
 abstract class Window(title: String, width: Int, height: Int):
   protected var window: Long = 0
 
+  def onStart(): Unit = ()
   def onUpdate(deltaTime: Double): Unit = println("parent update")
   def onRender(deltaTime: Double): Unit = println("parent render")
 
@@ -22,22 +24,23 @@ abstract class Window(title: String, width: Int, height: Int):
 
     var deltaTime: Double = 0.0
     var r = 0.0
-    var g = 0.0
-    var b = 0.0
 
+    onStart()
+    
     // Game loop
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window)) do
       val t0: Double = glfwGetTime()
-
-      onUpdate(deltaTime)
-      onRender(deltaTime)
-
+      
       r += deltaTime
       glClearColor((Math.cos(r).toFloat + 1) / 2,
-                   (Math.cos(r - Math.PI / 4).toFloat + 1) / 2,
-                   (Math.sin(r).toFloat + 1),
-                   0.0f)
+      (Math.cos(r - Math.PI / 4).toFloat + 1) / 2,
+      (Math.sin(r).toFloat + 1),
+      0.0f)
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+      
+      // Update and render functions
+      onUpdate(deltaTime)
+      onRender(deltaTime)
 
       // Swap buffers and handle events
       glfwSwapBuffers(window)
@@ -53,8 +56,7 @@ abstract class Window(title: String, width: Int, height: Int):
     glfwSetErrorCallback(null).free() // äckligt men det funkar :)
   
   def init(): Unit =
-    GLFWErrorCallback.createPrint(System.err).set()
-
+    GLFWErrorCallback.createPrint(System.err).set() 
     if (!glfwInit())
       throw new IllegalStateException("Unable to initialize GLFW!")
 
