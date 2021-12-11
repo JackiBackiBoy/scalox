@@ -1,4 +1,4 @@
-package scala3d
+package scalox
 
 import org.lwjgl.opengl.GL20._
 

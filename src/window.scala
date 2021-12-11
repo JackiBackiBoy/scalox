@@ -1,4 +1,4 @@
-package scala3d
+package scalox
 
 import org.lwjgl._
 import org.lwjgl.glfw._

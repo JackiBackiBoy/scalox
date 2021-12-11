@@ -1,4 +1,4 @@
-package scala3d
+package scalox
 
 import java.nio._
 import org.lwjgl.opengl.GL11._

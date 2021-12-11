@@ -1,4 +1,4 @@
-package scala3d
+package scalox
 
 case class Matrix4x4(data: Vector[Vector[Float]]):
 

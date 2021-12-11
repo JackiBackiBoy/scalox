@@ -1,4 +1,4 @@
-package scala3d
+package scalox
 
 object Main:
   def main(args: Array[String]): Unit =
