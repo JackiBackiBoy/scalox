@@ -37,7 +37,6 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
     shader.loadShader(ShaderType.Fragment, "assets/shaders/lighting_shader.frag")
     shader.createProgram();
     shader.setFloat("color", 0.5f)
-    
 
   override def onUpdate(deltaTime: Double): Unit = ()
     
