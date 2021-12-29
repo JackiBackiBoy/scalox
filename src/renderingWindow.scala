@@ -36,11 +36,12 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
     shader.loadShader(ShaderType.Vertex, "assets/shaders/lighting_shader.vert")
     shader.loadShader(ShaderType.Fragment, "assets/shaders/lighting_shader.frag")
     shader.createProgram();
+    shader.setFloat("color", 0.5f)
+    
 
-  override def onUpdate(deltaTime: Double): Unit =
-    println("Update")
+  override def onUpdate(deltaTime: Double): Unit = ()
     
   override def onRender(deltaTime: Double): Unit =
-    glUseProgram(shader.id)
+    shader.bind()
     glBindVertexArray(vao)
     glDrawArrays(GL_TRIANGLES, 0, 3)
