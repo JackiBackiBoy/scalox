@@ -28,3 +28,7 @@ class Shader:
   def setFloat(uniformName: String, value: Float): Unit =
     bind()
     glUniform1f(glGetUniformLocation(id, uniformName), value)
+
+  def setMatrix4x4(uniformName: String, value: Matrix4x4): Unit =
+    bind()
+    glUniformMatrix4fv(glGetUniformLocation(id, uniformName), false, value.flatData.toArray)

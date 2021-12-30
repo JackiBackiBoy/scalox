@@ -1,6 +1,7 @@
 package scalox
 
 class Matrix4x4(data: Vector[Vector[Float]]):
+  // Converts row-major to column major
   def this(r1c1: Float, r1c2: Float, r1c3: Float, r1c4: Float,
            r2c1: Float, r2c2: Float, r2c3: Float, r2c4: Float,
            r3c1: Float, r3c2: Float, r3c3: Float, r3c4: Float,
