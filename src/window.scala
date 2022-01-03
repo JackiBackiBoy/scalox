@@ -16,6 +16,7 @@ abstract class Window(title: String, width: Int, height: Int):
   def onStart(): Unit = ()
   def onUpdate(deltaTime: Double): Unit = println("parent update")
   def onRender(deltaTime: Double): Unit = println("parent render")
+  def getAspectRatio(): Float = width.toFloat / height
 
   def run(): Unit =
     println(s"Current LWJGL-version: ${Version.getVersion()}")

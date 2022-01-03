@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL30._
 import org.lwjgl.BufferUtils
 import org.lwjgl.system.MemoryUtil
 
-class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 1240):
+class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
   val vertices = Array[Float](-0.5f, -0.5f, -0.5f,
                                0.5f, -0.5f, -0.5f,
                                0.5f,  0.5f, -0.5f,
@@ -80,11 +80,11 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 1240):
 
   override def onUpdate(deltaTime: Double): Unit =
     t += deltaTime
-    var f = 1.0f / Math.tan(Math.PI / 4).toFloat
-    val projMatrix = new Matrix4x4(f,  0.0f, 0.0f, 0.0f,
-                                   0.0f,  f, 0.0f, 0.0f,
-                                   0.0f,  0.0f, 1.0f, 0.0f,
-                                   0.0f,  0.0f, 1.0f, 0.0f)
+    var d = 1.0f / Math.tan(Math.PI / 4).toFloat
+    val projMatrix = new Matrix4x4(d / getAspectRatio(),    0.0f, 0.0f, 0.0f,
+                                   0.0f, d,    0.0f, 0.0f,
+                                   0.0f, 0.0f, 1.0f, 0.0f,
+                                   0.0f, 0.0f, 1.0f, 0.0f)
 
     val translMatrix = new Matrix4x4(1.0f,  0.0f, 0.0f, 0.0f,
                                      0.0f,  1.0f, 0.0f, 0.0f,
