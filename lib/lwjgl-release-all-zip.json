@@ -4,6 +4,8 @@
   "selectedAddons": [],
   "platform": [
     "linux",
+    "linux-arm64",
+    "macos-arm64",
     "windows"
   ],
   "descriptions": false,
@@ -15,6 +17,6 @@
   "osgi": false,
   "language": "groovy",
   "preset": "all",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "versionLatest": "3.3.0"
 }

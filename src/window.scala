@@ -58,11 +58,14 @@ abstract class Window(title: String, width: Int, height: Int):
   
   def init(): Unit =
     GLFWErrorCallback.createPrint(System.err).set() 
+    
     if (!glfwInit())
       throw new IllegalStateException("Unable to initialize GLFW!")
-
+    
     // Konfigurera och skapa fönstret
     glfwDefaultWindowHints()
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // explicit call required
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2); // explicit call required
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE)
     window = glfwCreateWindow(width, height, title, NULL, NULL)

@@ -59,6 +59,8 @@ class RenderingWindow extends Window("Scala 3D | Jack Henrikson", 1240, 720):
     vao = glGenVertexArrays()
     glBindVertexArray(vao)
 
+    println("genV")
+
     var verticesBuffer: FloatBuffer = MemoryUtil.memAllocFloat(vertices.length)
     verticesBuffer.put(vertices).flip()
 

@@ -1,7 +1,5 @@
 package scalox
 
-import org.lwjgl.system.CallbackI.V
-
 class Matrix4x4(val data: Array[Array[Float]]):
   import Matrix4x4._
 
