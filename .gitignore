@@ -8,5 +8,8 @@
 **/.bsp
 **/null
 
+# MacOS
+.DS_Store
+
 # SBT
 **/target
